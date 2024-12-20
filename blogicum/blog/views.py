@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 posts = [
@@ -50,15 +51,20 @@ def index(request):
     return render(request, template_name, context)
 
 
-def post_detail(request, id):
+def post_detail(request, number):
     template_name = 'blog/detail.html'
-    context = {'post': posts[id]}
+    list_of_post = []
+    for post in posts:
+        list_of_post.append(post['id'])
+        if post['id'] == int(number):
+            context = {'post': post}
+            break
+    if int(number) not in list_of_post:
+        raise Http404('Данной страницы на нашем сайте нет! :(')
     return render(request, template_name, context)
 
 
 def category_posts(request, category_slug):
     template_name = 'blog/category.html'
-    slug = {'slugs': category_slug}
-    return render(request, template_name, slug)
-
-# Create your views here.
+    category = {'category': category_slug}
+    return render(request, template_name, category)

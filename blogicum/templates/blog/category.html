@@ -1,11 +1,8 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
 
 {% block title %}
-<title>Публикации в категории {{ slugs }}</title>
+  Публикации в категории {{ category }}
 {% endblock %}
 {% block content %}
-<div class="container py-5">
-  <h1>Публикации в категории {{ slugs }}</h1>   
-</div>
+  <h1>Публикации в категории {{ category }}</h1>   
 {% endblock %}
